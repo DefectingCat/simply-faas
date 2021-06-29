@@ -1,0 +1,1 @@
+git push master && git push github && git push xfy
