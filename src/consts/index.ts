@@ -1,0 +1,3 @@
+const UID_NAMESPACE = 'a0123823-8c14-44a4-bb4a-87849f27042c';
+
+export { UID_NAMESPACE };
