@@ -1,3 +1,3 @@
 (event, context) => {
-  return { message: 'it works!', status: 'ok ' };
+  return { message: 'it works!', status: 'ok ', event };
 };

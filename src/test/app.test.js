@@ -15,13 +15,21 @@ describe('Base tests', () => {
       .get('/')
       .set('Accept', 'application/json')
       .expect(200)
-      .expect('Home!');
+      .expect('Hello!');
   });
   it('run func 1', async () => {
     await request(server)
       .get('/func')
       .set('Accept', 'application/json')
       .expect(200)
-      .expect('{"message":"it works!","status":"ok "}');
+      .expect('{"message":"it works!","status":"ok ","event":{}}');
+  });
+  it('run func 1 with post', async () => {
+    await request(server)
+      .post('/func')
+      .set('Accept', 'application/json')
+      .send({ name: 'xfy' })
+      .expect(200)
+      .expect('{"message":"it works!","status":"ok ","event":{"name":"xfy"}}');
   });
 });

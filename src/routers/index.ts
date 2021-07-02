@@ -6,7 +6,8 @@ const router = new Router();
 
 router.get('/', async (ctx: Context) => {
   const uuid = uuidv4();
-  ctx.body = `Hello! ${uuid}`;
+  console.log(uuid);
+  ctx.body = `Hello!`;
 });
 
 export default router;
