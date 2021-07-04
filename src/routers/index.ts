@@ -7,14 +7,12 @@ import deleteFunc from '../hook/deleteFunc';
 
 const router = new Router();
 
-router.prefix('/api');
-
 router.get('/', async (ctx: Context) => {
-  ctx.body = `Hello!`;
+  ctx.body = 'Hello!';
 });
 
 // 获取 UUID 请求
-router.get('/user', async (ctx: Context) => {
+router.get('/api/user', async (ctx: Context) => {
   const uuid = uuidv4();
   const user = {
     userId: uuid,
@@ -22,8 +20,13 @@ router.get('/user', async (ctx: Context) => {
   ctx.body = user;
 });
 
-// 创建函数请求
-router.post('/create', async (ctx: Context) => {
+/**
+ * 该函数用于接收用户创建的函数
+ * @param  {} '/create' 接口地址
+ * @param  {Context} ctx Koa 上下文
+ * @return 成功时返回带有 userId 的状态
+ */
+router.post('/api/create', async (ctx: Context) => {
   const body = ctx.request.body;
   if (typeof body === 'object' && typeof body.userId === 'string') {
     if (uuidValidate(body.userId)) {
@@ -39,8 +42,13 @@ router.post('/create', async (ctx: Context) => {
   }
 });
 
-// 获取已有函数列表
-router.post('/list', async (ctx: Context) => {
+/**
+ * 该函数用于获取已有函数列表
+ * @param  {} '/list' 接口地址
+ * @param  {Context} ctx Koa 上下文
+ * @return 成功时返回带有 userId 的状态
+ */
+router.post('/api/list', async (ctx: Context) => {
   const body = ctx.request.body;
   if (typeof body === 'object' && typeof body.userId === 'string') {
     if (uuidValidate(body.userId)) {
@@ -56,8 +64,13 @@ router.post('/list', async (ctx: Context) => {
   }
 });
 
-// 删除指定函数
-router.delete('/list', async (ctx: Context) => {
+/**
+ * 该函数用于删除指定函数
+ * @param  {} '/list' 接口地址
+ * @param  {Context} ctx Koa 上下文
+ * @return 成功时返回带有 userId 的状态
+ */
+router.delete('/api/list', async (ctx: Context) => {
   const body = ctx.request.body;
   if (
     typeof body === 'object' &&
