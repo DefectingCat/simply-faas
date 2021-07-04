@@ -1,4 +1,4 @@
-(event, context) => {
+module.exports = (event, ctx) => {
   Promise.resolve().then(() => {
     while (1) {}
   });

@@ -4,11 +4,13 @@ import logger from 'koa-logger';
 import OPTION from './option';
 import router from './routers';
 import bodyParser from 'koa-bodyparser';
+import cors from './middleware/CORS';
 
 const app = new Koa();
 
 app.use(logger());
 app.use(bodyParser());
+app.use(cors);
 // 先注册路由
 app.use(router.routes());
 app.use(router.allowedMethods());

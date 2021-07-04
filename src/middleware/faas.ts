@@ -23,11 +23,14 @@ const run = async (
 ) => {
   try {
     // Read the function from user
-    const fn = await fs.readFile(`${FUNC_PATH}/${path}.js`, {
-      encoding: 'utf-8',
-    });
+    // const fn = await fs.readFile(`${FUNC_PATH}/${path}.js`, {
+    //   encoding: 'utf-8',
+    // });
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const fn = require(`${FUNC_PATH}/${path}.js`);
     // Use arrow function to handle semicolon
-    const fnIIFE = `const func = ${fn}`;
+    const fnIIFE = `const fn = ${fn.toString()};`;
+    console.log('test:', fnIIFE);
 
     // 创建 safeify 实例
     const safeVm = new Safeify({
@@ -38,8 +41,12 @@ const run = async (
     });
 
     const result = await safeVm.run(
-      ` ${fnIIFE} return func(${JSON.stringify(event)},${JSON.stringify(ctx)})`
+      `${fnIIFE} return fn(${JSON.stringify(event)}, ${JSON.stringify(ctx)})`
     );
+    console.log(result);
+    // const result = await safeVm.run(
+    //   ` ${fn} return fn(${JSON.stringify(event)},${JSON.stringify(ctx)})`
+    // );
 
     // 释放资源
     safeVm.destroy();
