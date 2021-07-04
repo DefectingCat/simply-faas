@@ -51,6 +51,7 @@ const run = async (
 type runFaaS = (ctx: Context) => Promise<void>;
 
 const runFaaS: runFaaS = async (ctx) => {
+  ctx.response.type = 'html';
   // 如果是 POST，则传递 body 给函数
   if (ctx.req.method === 'POST') {
     ctx.response.body = await run(ctx.request.path, ctx, ctx.request.body);

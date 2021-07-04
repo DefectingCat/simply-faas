@@ -8,3 +8,7 @@ This is a simply FaaS services built on Node.js runtime. The purpose is to simul
 - [x] Divide user by UUID
 - [x] Delete specified function
 - [x] Pass body of POST to function
+
+## ♥
+
+* [safeify](https://github.com/Houfeng/safeify)
