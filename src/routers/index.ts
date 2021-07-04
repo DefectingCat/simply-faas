@@ -4,6 +4,7 @@ import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import readFunc from '../hook/readFunc';
 import createFunc, { body } from '../hook/createFunc';
 import deleteFunc from '../hook/deleteFunc';
+import editFunc from '../hook/editFunc';
 
 const router = new Router();
 
@@ -82,6 +83,32 @@ router.delete('/api/list', async (ctx: Context) => {
       const funcList = {
         userId: body.userId,
         state,
+      };
+      ctx.body = funcList;
+    } else {
+      ctx.body = 'ID 错误';
+    }
+  }
+});
+
+/**
+ * 该函数用于读取指定的函数内容
+ * @param  {} '/edit' 接口地址
+ * @param  {Context} ctx Koa 上下文
+ * @return 成功时返回带有 userId 的函数内容
+ */
+router.post('/api/edit', async (ctx: Context) => {
+  const body = ctx.request.body;
+  if (
+    typeof body === 'object' &&
+    typeof body.userId === 'string' &&
+    typeof body.funcName === 'string'
+  ) {
+    if (uuidValidate(body.userId)) {
+      const context = await editFunc(body.userId, body.funcName);
+      const funcList = {
+        userId: body.userId,
+        funContext: context,
       };
       ctx.body = funcList;
     } else {

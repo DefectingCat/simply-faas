@@ -10,7 +10,7 @@ const readFunc = async (userId: string): Promise<string[]> => {
     const result = await fs.readdir(`${FUNC_PATH}/${userId}`);
     return result;
   } catch (e) {
-    return [''];
+    return [];
   }
 };
 
