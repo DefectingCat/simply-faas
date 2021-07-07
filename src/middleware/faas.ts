@@ -1,5 +1,6 @@
 import os from 'os';
-import { Safeify } from 'safeify';
+// import { Safeify } from 'safeify';
+import { Safeify } from '../lib';
 import type { Context } from 'koa';
 import { FUNC_PATH } from '../consts';
 
@@ -30,8 +31,6 @@ const run = async (
     const safeVm = new Safeify({
       timeout: 3000,
       asyncTimeout: 6000,
-      quantity: CPUs,
-      cpuQuota: 0.2,
     });
 
     // 在沙箱中运行并返回
